@@ -1,4 +1,4 @@
-# PDIRP daily anchors — how to verify
+# PDRP daily anchors — how to verify
 
 This repository publishes one JSON file per day:
 
@@ -16,7 +16,9 @@ Each file contains:
 It proves that the global state of the registry for that UTC day was committed publicly.
 It does NOT publish individual record hashes.
 
-## Verification logic (independent)
+## Two verification modes
+
+### Mode A — Full recomputation (requires full record list)
 
 For a given UTC date D:
 
@@ -27,6 +29,37 @@ For a given UTC date D:
 4) Compare your result to anchor_hash_sha256 in anchors/D.json.
 
 If the hashes match, the day-state is verified.
+
+### Mode B — Inclusion proof (does NOT require the full record list)
+
+This mode allows a verifier to recover a verifiable date bound for a declaration
+without access to the registry database or other records.
+
+The holder of a declaration keeps a minimal client-side bundle:
+
+- fact_hash
+- created_at_utc
+- leaf_hash
+- leaf_index
+- anchor_date_utc
+- anchor_hash
+- (optional) Merkle siblings when the bucket contains multiple declarations
+
+#### Canonical leaf hash
+
+The protocol defines the canonical leaf hash as:
+
+leaf_hash = SHA256( fact_hash || "|" || created_at_utc )
+
+#### Verification (offline)
+
+1) Recompute leaf_hash from fact_hash and created_at_utc.
+2) Recompute the bucket root using leaf_index and siblings (if any).
+3) Verify equality with anchor_hash (from anchors/YYYY-MM-DD.json).
+4) The verifiable date of the declaration is the publication date of anchor_date_utc.
+
+This proves antériorité (existence before a date). It does not prove authorship,
+ownership, accuracy, or truth.
 
 ## Notes
 
