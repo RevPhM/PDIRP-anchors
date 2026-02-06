@@ -16,6 +16,21 @@ Each file contains:
 It proves that the global state of the registry for that UTC day was committed publicly.
 It does NOT publish individual record hashes.
 
+The registry assigns each declaration act an exact creation timestamp
+at acceptance time.
+
+Independently, each declaration is included in a publicly published
+daily UTC anchor.
+
+If the registry database is unavailable, verification through the daily
+anchor establishes the UTC day during which the declaration was created
+and accepted. The anchor does not provide the exact creation time.
+
+The daily anchor does not establish the exact time of creation. It allows
+recovery of a verifiable creation date (UTC day) even if the registry
+database is no longer accessible.
+
+
 ## Two verification modes
 
 ### Mode A — Full recomputation (requires full record list)
@@ -58,7 +73,7 @@ leaf_hash = SHA256( fact_hash || "|" || created_at_utc )
 3) Verify equality with anchor_hash (from anchors/YYYY-MM-DD.json).
 4) The verifiable date of the declaration is the publication date of anchor_date_utc.
 
-This proves antériorité (existence before a date). It does not prove authorship,
+This proves anteriority (existence before a date). It does not prove authorship,
 ownership, accuracy, or truth.
 
 ## Notes
