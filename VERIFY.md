@@ -1,4 +1,4 @@
-# PDRP daily anchors — how to verify
+# PDIRP daily anchors — how to verify
 
 This repository publishes one JSON file per day:
 
