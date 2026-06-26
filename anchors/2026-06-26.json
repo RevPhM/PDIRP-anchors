@@ -1,0 +1,9 @@
+{
+  "protocol": "PDIRP",
+  "anchor_date_utc": "2026-06-26",
+  "anchor_hash_sha256": "b45aa1f401a25a0851c97ce94d151eba32441a4ca5890198750bf7d36d6cae4f",
+  "records_count": 1,
+  "range_start_utc": "2026-06-26T00:00:00+00:00",
+  "range_end_utc": "2026-06-27T00:00:00+00:00",
+  "created_at_utc": "2026-06-26T00:58:09.136662+00:00"
+}
